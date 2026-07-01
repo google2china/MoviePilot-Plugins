@@ -22,40 +22,40 @@ from pathlib import Path
 
 
 class PTAutoTaskdiy(_PluginBase):
-    # ²å¼şÃû³Æ
-    plugin_name = "PT×Ô¶¯ÈÎÎñ(×ÔÓÃ°æ)"
-    # ²å¼şÃèÊö
-    plugin_desc = "ÓÃÀ´Ö´ĞĞÒ»Ğ©Õ¾µãµÄ¶¨ÆÚÈÎÎñ£¬°üÀ¨µ«²»ÏŞÓÚÇ©µ½¡¢º°»°¡¢ÁìÈ¡ÈÎÎñµÈ;±¾°æ±¾ÔÚliuyunfz´óÀĞ²å¼ş»ù´¡ÉÏÔö¼ÓÁËÈô¸ÉÆäËûÕ¾µãÖÜÆÚĞÔÈÎÎñÁìÈ¡¹¦ÄÜ"
-    # ²å¼şÍ¼±ê
+    # æ’ä»¶åç§°
+    plugin_name = "PTè‡ªåŠ¨ä»»åŠ¡(è‡ªç”¨ç‰ˆ)"
+    # æ’ä»¶æè¿°
+    plugin_desc = "ç”¨æ¥æ‰§è¡Œä¸€äº›ç«™ç‚¹çš„å®šæœŸä»»åŠ¡ï¼ŒåŒ…æ‹¬ä½†ä¸é™äºç­¾åˆ°ã€å–Šè¯ã€é¢†å–ä»»åŠ¡ç­‰;æœ¬ç‰ˆæœ¬åœ¨liuyunfzå¤§ä½¬æ’ä»¶åŸºç¡€ä¸Šå¢åŠ äº†è‹¥å¹²å…¶ä»–ç«™ç‚¹å‘¨æœŸæ€§ä»»åŠ¡é¢†å–åŠŸèƒ½"
+    # æ’ä»¶å›¾æ ‡
     plugin_icon = "https://raw.githubusercontent.com/liuyunfz/MoviePilot-Plugins/main/icons/ptautotask.png"
-    # ²å¼ş°æ±¾
+    # æ’ä»¶ç‰ˆæœ¬
     plugin_version = "1.1.8"
-    # ²å¼ş×÷Õß
-    plugin_author = "liuyunfz,bfjy£¬tzk"
-    # ×÷ÕßÖ÷Ò³
+    # æ’ä»¶ä½œè€…
+    plugin_author = "liuyunfz,bfjyï¼Œtzk"
+    # ä½œè€…ä¸»é¡µ
     author_url = "https://bfjy2024.github.io/bfjy"
-    # ²å¼şÅäÖÃÏîIDÇ°×º
+    # æ’ä»¶é…ç½®é¡¹IDå‰ç¼€
     plugin_config_prefix = "ptautotaskdiy_"
-    # ¼ÓÔØË³Ğò
+    # åŠ è½½é¡ºåº
     plugin_order = 24
-    # ¿ÉÊ¹ÓÃµÄÓÃ»§¼¶±ğ
+    # å¯ä½¿ç”¨çš„ç”¨æˆ·çº§åˆ«
     auth_level = 1
 
-    # Ë½ÓĞÊôĞÔ
+    # ç§æœ‰å±æ€§
     _enabled = False
-    # ÈÎÎñÖ´ĞĞ¼ä¸ô
+    # ä»»åŠ¡æ‰§è¡Œé—´éš”
     _cron = None
     _onlyonce = False
     _notify = False
     _history_days = None
-    # ÖØÊÔÏà¹Ø
-    _retry_count = 0  # ×î´óÖØÊÔ´ÎÊı
-    _current_retry = 0  # µ±Ç°ÖØÊÔ´ÎÊı
-    _retry_interval = 2  # ÖØÊÔ¼ä¸ô(Ğ¡Ê±)
-    # ´úÀíÏà¹Ø
-    _use_proxy = False  # ÊÇ·ñÊ¹ÓÃ´úÀí£¬Ä¬ÈÏÆôÓÃ
+    # é‡è¯•ç›¸å…³
+    _retry_count = 0  # æœ€å¤§é‡è¯•æ¬¡æ•°
+    _current_retry = 0  # å½“å‰é‡è¯•æ¬¡æ•°
+    _retry_interval = 2  # é‡è¯•é—´éš”(å°æ—¶)
+    # ä»£ç†ç›¸å…³
+    _use_proxy = False  # æ˜¯å¦ä½¿ç”¨ä»£ç†ï¼Œé»˜è®¤å¯ç”¨
 
-    # ¶¨Ê±Æ÷
+    # å®šæ—¶å™¨
     _scheduler: Optional[BackgroundScheduler] = None
 
     def __init__(self):
@@ -67,11 +67,11 @@ class PTAutoTaskdiy(_PluginBase):
 
     def __init_load_sites(self):
         """
-        ³õÊ¼»¯²å¼şÖ§³ÖÕ¾µã
+        åˆå§‹åŒ–æ’ä»¶æ”¯æŒç«™ç‚¹
         """
         sites_info = []
 
-        # È·¶¨ sites ÎÄ¼ş¼ĞÂ·¾¶£¨Ïà¶Ô ptautotask Ä£¿é£©
+        # ç¡®å®š sites æ–‡ä»¶å¤¹è·¯å¾„ï¼ˆç›¸å¯¹ ptautotask æ¨¡å—ï¼‰
         sites_path = Path(__file__).parent / "sites"
         pkg_prefix = __package__ or "ptautotask"
         for module_info in pkgutil.iter_modules([str(sites_path)]):
@@ -79,11 +79,11 @@ class PTAutoTaskdiy(_PluginBase):
             try:
                 module = importlib.import_module(module_name)
 
-                # ÕÒ³ö Client Àà
+                # æ‰¾å‡º Client ç±»
                 client_cls = None
                 tasks_cls = None
                 for name, obj in inspect.getmembers(module, inspect.isclass):
-                    # È·±£ÊÇµ±Ç°Ä£¿é¶¨ÒåµÄÀà£¬¶ø²»ÊÇµ¼ÈëµÄ
+                    # ç¡®ä¿æ˜¯å½“å‰æ¨¡å—å®šä¹‰çš„ç±»ï¼Œè€Œä¸æ˜¯å¯¼å…¥çš„
                     if getattr(obj, "__module__", "") != getattr(module, "__name__", ""):
                         continue
                     if name.lower() == "tasks":
@@ -96,20 +96,20 @@ class PTAutoTaskdiy(_PluginBase):
 
                 site_name = client_cls.get_site_name() if hasattr(client_cls, "get_site_name") else module_info.name
                 site_url = client_cls.get_site_domain() if hasattr(client_cls, "get_site_domain") else ""
-                # ³õÊ¼»¯ tasks
-                # ÓÉÓÚ»ñÈ¡ÈÎÎñ·½·¨·Ç¾²Ì¬£¬¹ÊĞèÒªÊµÀı»¯
+                # åˆå§‹åŒ– tasks
+                # ç”±äºè·å–ä»»åŠ¡æ–¹æ³•éé™æ€ï¼Œæ•…éœ€è¦å®ä¾‹åŒ–
                 tasks = tasks_cls(cookie=None)
                 task_list = tasks.get_registered_tasks() if hasattr(tasks, "get_registered_tasks") else []
-                # ÊÍ·Å tasks ÊµÀı,·ÀÖ¹Õ¼ÓÃ¹ı¶àÄÚ´æ
+                # é‡Šæ”¾ tasks å®ä¾‹,é˜²æ­¢å ç”¨è¿‡å¤šå†…å­˜
                 del tasks
                 sites_info.append({
                     "name": site_name,
                     "domain": site_url,
                     "tasks": task_list
                 })
-                logger.info(f"³É¹¦¼ÓÔØÕ¾µã {site_name}£¬Ö§³ÖÈÎÎñÊı£º{len(task_list)}")
+                logger.info(f"æˆåŠŸåŠ è½½ç«™ç‚¹ {site_name}ï¼Œæ”¯æŒä»»åŠ¡æ•°ï¼š{len(task_list)}")
             except ModuleNotFoundError:
-                # »ØÍË£º³¢ÊÔÍ¨¹ıÎÄ¼şÂ·¾¶Ö±½Ó¼ÓÔØÄ£¿é£¨ÊÊÓÃÓÚ×÷Îª½Å±¾»òÃ»ÓĞ°Ñ°ü·ÅÈë sys.path µÄÇé¿ö£©
+                # å›é€€ï¼šå°è¯•é€šè¿‡æ–‡ä»¶è·¯å¾„ç›´æ¥åŠ è½½æ¨¡å—ï¼ˆé€‚ç”¨äºä½œä¸ºè„šæœ¬æˆ–æ²¡æœ‰æŠŠåŒ…æ”¾å…¥ sys.path çš„æƒ…å†µï¼‰
                 try:
                     module_file = sites_path / (module_info.name + ".py")
                     if module_file.exists():
@@ -117,7 +117,7 @@ class PTAutoTaskdiy(_PluginBase):
                         module = importlib.util.module_from_spec(spec)
                         spec.loader.exec_module(module)
                     else:
-                        # Èç¹ûÊÇ°üÄ¿Â¼£¨º¬ __init__.py£©£¬Ò²³¢ÊÔ¼ÓÔØ°üµÄ __init__.py
+                        # å¦‚æœæ˜¯åŒ…ç›®å½•ï¼ˆå« __init__.pyï¼‰ï¼Œä¹Ÿå°è¯•åŠ è½½åŒ…çš„ __init__.py
                         package_dir = sites_path / module_info.name
                         init_file = package_dir / "__init__.py"
                         if init_file.exists():
@@ -125,18 +125,18 @@ class PTAutoTaskdiy(_PluginBase):
                             module = importlib.util.module_from_spec(spec)
                             spec.loader.exec_module(module)
                         else:
-                            raise ModuleNotFoundError(f"Ä£¿éÎÄ¼şÎ´ÕÒµ½: {module_info.name}")
+                            raise ModuleNotFoundError(f"æ¨¡å—æ–‡ä»¶æœªæ‰¾åˆ°: {module_info.name}")
                 except Exception as e:
-                    logger.error(f"¼ÓÔØÕ¾µã {module_info.name} Ê§°Ü: {e}")
+                    logger.error(f"åŠ è½½ç«™ç‚¹ {module_info.name} å¤±è´¥: {e}")
                     continue
             except Exception as e:
-                logger.error(f"¼ÓÔØÕ¾µã {module_name} Ê§°Ü: {e}")
+                logger.error(f"åŠ è½½ç«™ç‚¹ {module_name} å¤±è´¥: {e}")
 
         return sites_info
 
     def get_support_sites(self):
         """
-        »ñÈ¡²å¼şÖ§³ÖµÄËùÓĞÕ¾µãÁĞ±í£¨²»º¬ cookie£©
+        è·å–æ’ä»¶æ”¯æŒçš„æ‰€æœ‰ç«™ç‚¹åˆ—è¡¨ï¼ˆä¸å« cookieï¼‰
         """
         if not hasattr(self, "support_sites") or self.support_sites is None:
             self.support_sites = self.__init_load_sites()
@@ -144,7 +144,7 @@ class PTAutoTaskdiy(_PluginBase):
 
     def __init_filter_sites(self):
         """
-        ¹ıÂË³öÒÑÆôÓÃµÄÕ¾µã
+        è¿‡æ»¤å‡ºå·²å¯ç”¨çš„ç«™ç‚¹
         """
         support_sites = self.get_support_sites()
         filter_sites = []
@@ -159,8 +159,8 @@ class PTAutoTaskdiy(_PluginBase):
 
     def get_filter_sites(self, force: bool = False):
         """
-        »ñÈ¡ÒÑÆôÓÃ²¢´ø cookie µÄÕ¾µãÁĞ±í¡£
-        Ä¬ÈÏÊ¹ÓÃ»º´æ£»µ±ĞèÒª×îĞÂÊı¾İÊ±´«Èë force=True Ç¿ÖÆÖØĞÂÉ¨Ãè¡£
+        è·å–å·²å¯ç”¨å¹¶å¸¦ cookie çš„ç«™ç‚¹åˆ—è¡¨ã€‚
+        é»˜è®¤ä½¿ç”¨ç¼“å­˜ï¼›å½“éœ€è¦æœ€æ–°æ•°æ®æ—¶ä¼ å…¥ force=True å¼ºåˆ¶é‡æ–°æ‰«æã€‚
         """
         if not force and self.filter_sites is not None:
             return self.filter_sites
@@ -169,14 +169,14 @@ class PTAutoTaskdiy(_PluginBase):
 
     def __init_build_config(self):
         """
-        ¹¹Ôì³öĞèÒª¶ÁÈ¡/Ğ´ÈëµÄÅäÖÃÏî
+        æ„é€ å‡ºéœ€è¦è¯»å–/å†™å…¥çš„é…ç½®é¡¹
         """
         filter_sites = self.get_filter_sites()
         configs_by_domain = {}
         for support_site in filter_sites:
             domain = support_site.get("domain")
             configs_by_domain[domain] = [ids for ids in support_site.get("tasks")]
-        # ·µ»ØÊ¾Àı {"m-team.cc": ["mteam_daily_checkin", "mteam_bonus_checkin"], "pt.sjtu.edu.cn": ["sjtu_daily_checkin"]}
+        # è¿”å›ç¤ºä¾‹ {"m-team.cc": ["mteam_daily_checkin", "mteam_bonus_checkin"], "pt.sjtu.edu.cn": ["sjtu_daily_checkin"]}
         return configs_by_domain
 
     def get_config_group_by_domain(self):
@@ -211,7 +211,7 @@ class PTAutoTaskdiy(_PluginBase):
                                     'props': {
                                         'style': 'font-size: 1.1rem; font-weight: 500;'
                                     },
-                                    'text': '{}Õ¾µãÉèÖÃ'.format(config.get("name") if config.get("name") else "Î´Öª")
+                                    'text': '{}ç«™ç‚¹è®¾ç½®'.format(config.get("name") if config.get("name") else "æœªçŸ¥")
                                 }
                             ]
                         }
@@ -268,7 +268,7 @@ class PTAutoTaskdiy(_PluginBase):
 
     def __build_form(self):
         """
-        ¹¹Ôì³öÅäÖÃÒ³Ãæ£¨·µ»Ø Python ÁĞ±í/×Öµä½á¹¹£©
+        æ„é€ å‡ºé…ç½®é¡µé¢ï¼ˆè¿”å› Python åˆ—è¡¨/å­—å…¸ç»“æ„ï¼‰
         """
         filter_sites = self.get_filter_sites(force=True)
 
@@ -289,7 +289,7 @@ class PTAutoTaskdiy(_PluginBase):
                     },
                     {
                         'component': 'span',
-                        'text': 'Õ¾µã¸öĞÔ»¯ÉèÖÃ'
+                        'text': 'ç«™ç‚¹ä¸ªæ€§åŒ–è®¾ç½®'
                     }
                 ]
             },
@@ -298,12 +298,12 @@ class PTAutoTaskdiy(_PluginBase):
             }
         ]
 
-        # ÊÕ¼¯ËùÓĞÕ¾µãµÄ×é¼şÆ¬¶Î£¨__build_form_item ·µ»ØµÄÊÇ Python ÔªËØÁĞ±í£©
+        # æ”¶é›†æ‰€æœ‰ç«™ç‚¹çš„ç»„ä»¶ç‰‡æ®µï¼ˆ__build_form_item è¿”å›çš„æ˜¯ Python å…ƒç´ åˆ—è¡¨ï¼‰
         site_sections = []
         for support_site in filter_sites:
             site_sections.extend(self.__build_form_item(support_site))
 
-        # ½«ËùÓĞÕ¾µãÆ¬¶Î·Åµ½Ò»¸ö VCardText µÄ content ÖĞ
+        # å°†æ‰€æœ‰ç«™ç‚¹ç‰‡æ®µæ”¾åˆ°ä¸€ä¸ª VCardText çš„ content ä¸­
         components = []
         components.extend(head_components)
         components.append({
@@ -315,7 +315,7 @@ class PTAutoTaskdiy(_PluginBase):
 
     def get_config_list(self) -> List[str]:
         """
-        »ñÈ¡Õ¾µãÅäÖÃÏîÁĞ±í
+        è·å–ç«™ç‚¹é…ç½®é¡¹åˆ—è¡¨
         """
         if self.config_list is None:
             configs_by_domain = self.__init_build_config()
@@ -323,40 +323,40 @@ class PTAutoTaskdiy(_PluginBase):
             for configs in configs_by_domain.values():
                 config_list.extend([config.get("id") for config in configs])
             self.config_list = config_list
-        # ·µ»ØÊ¾Àı ["mteam_daily_checkin", "mteam_bonus_checkin", "sjtu_daily_checkin"]
+        # è¿”å›ç¤ºä¾‹ ["mteam_daily_checkin", "mteam_bonus_checkin", "sjtu_daily_checkin"]
         return self.config_list
 
     def init_plugin(self, config: dict = None):
         """
-        ²å¼ş³õÊ¼»¯
+        æ’ä»¶åˆå§‹åŒ–
         """
         sites_configs = self.get_config_list()
-        # ½ÓÊÕ²ÎÊı
+        # æ¥æ”¶å‚æ•°
         if config:
             self._enabled = config.get("enabled", False)
             self._notify = config.get("notify", False)
             self._cron = config.get("cron", "30 9,21 * * *")
             self._onlyonce = config.get("onlyonce", False)
             self._history_days = config.get("history_days", 30)
-            # Õ¾µã¸öĞÔ»¯ÅäÖÃÊôĞÔ
+            # ç«™ç‚¹ä¸ªæ€§åŒ–é…ç½®å±æ€§
             for site_config in sites_configs:
                 setattr(self, site_config, config.get(site_config, None))
 
-        # Í£Ö¹ÏÖÓĞÈÎÎñ
+        # åœæ­¢ç°æœ‰ä»»åŠ¡
         self.stop_service()
 
-        # È·±£schedulerÊÇĞÂµÄ
+        # ç¡®ä¿scheduleræ˜¯æ–°çš„
         self._scheduler = BackgroundScheduler(timezone=settings.TZ)
 
-        # Á¢¼´ÔËĞĞÒ»´Î
+        # ç«‹å³è¿è¡Œä¸€æ¬¡
         if self._onlyonce:
-            logger.info(f"PT-Auto-Task·şÎñÆô¶¯£¬Á¢¼´ÔËĞĞÒ»´Î")
+            logger.info(f"PT-Auto-TaskæœåŠ¡å¯åŠ¨ï¼Œç«‹å³è¿è¡Œä¸€æ¬¡")
             self._scheduler.add_job(func=self.__do_tasks, trigger='date',
                                     run_date=datetime.now(tz=pytz.timezone(settings.TZ)) + timedelta(seconds=3),
                                     name="PT_Task")
-            # ¹Ø±ÕÒ»´ÎĞÔ¿ª¹Ø
+            # å…³é—­ä¸€æ¬¡æ€§å¼€å…³
             self._onlyonce = False
-            # ÔÚ¸üĞÂ³Ö¾ÃÅäÖÃÊ±±£ÁôËùÓĞÕ¾µã¿ª¹Ø£¬±ÜÃâ¸²¸ÇÎª False
+            # åœ¨æ›´æ–°æŒä¹…é…ç½®æ—¶ä¿ç•™æ‰€æœ‰ç«™ç‚¹å¼€å…³ï¼Œé¿å…è¦†ç›–ä¸º False
             payload = {
                 "onlyonce": False,
                 "cron": self._cron,
@@ -365,24 +365,24 @@ class PTAutoTaskdiy(_PluginBase):
                 "history_days": self._history_days,
             }
             for site_config in sites_configs:
-                # ±£Áôµ±Ç°ÄÚ´æÖĞ¸ÃÕ¾µãÅäÖÃµÄÖµ£¨Ö®Ç°ÒÑ´Ó config ¸³Öµ£©
+                # ä¿ç•™å½“å‰å†…å­˜ä¸­è¯¥ç«™ç‚¹é…ç½®çš„å€¼ï¼ˆä¹‹å‰å·²ä» config èµ‹å€¼ï¼‰
                 payload[site_config] = getattr(self, site_config, False)
 
             self.update_config(payload)
-        # ÖÜÆÚÔËĞĞ
+        # å‘¨æœŸè¿è¡Œ
         elif self._cron:
-            logger.info(f"Õ¾µãÖÜÆÚÈÎÎñ·şÎñÆô¶¯£¬ÖÜÆÚ£º{self._cron}")
+            logger.info(f"ç«™ç‚¹å‘¨æœŸä»»åŠ¡æœåŠ¡å¯åŠ¨ï¼Œå‘¨æœŸï¼š{self._cron}")
             self._scheduler.add_job(func=self.__do_tasks,
                                     trigger=CronTrigger.from_crontab(self._cron),
                                     name="PT_Task")
-        # Æô¶¯ÈÎÎñ
+        # å¯åŠ¨ä»»åŠ¡
         if self._scheduler.get_jobs():
             self._scheduler.print_jobs()
             self._scheduler.start()
 
     def _send_notification(self, title, text):
         """
-        ·¢ËÍÍ¨Öª
+        å‘é€é€šçŸ¥
         """
         if self._notify:
             self.post_message(
@@ -393,15 +393,15 @@ class PTAutoTaskdiy(_PluginBase):
 
     def _schedule_retry(self, hours=None):
         """
-        °²ÅÅÖØÊÔÈÎÎñ
-        :param hours: ÖØÊÔ¼ä¸ôĞ¡Ê±Êı£¬Èç¹û²»Ö¸¶¨ÔòÊ¹ÓÃÅäÖÃµÄ_retry_interval
+        å®‰æ’é‡è¯•ä»»åŠ¡
+        :param hours: é‡è¯•é—´éš”å°æ—¶æ•°ï¼Œå¦‚æœä¸æŒ‡å®šåˆ™ä½¿ç”¨é…ç½®çš„_retry_interval
         """
         pass
 
 
     def _schedule_retry(self, hours=None):
         """
-        °²ÅÅÖØÊÔÈÎÎñ£ºÔÚµ±Ç° scheduler ÖĞÔö¼ÓÒ»´ÎĞÔÈÎÎñÒÔ±ãÉÔºóÖØÊÔ __do_tasks
+        å®‰æ’é‡è¯•ä»»åŠ¡ï¼šåœ¨å½“å‰ scheduler ä¸­å¢åŠ ä¸€æ¬¡æ€§ä»»åŠ¡ä»¥ä¾¿ç¨åé‡è¯• __do_tasks
         """
         try:
             interval = hours if hours is not None else self._retry_interval
@@ -410,66 +410,66 @@ class PTAutoTaskdiy(_PluginBase):
                 self._scheduler = BackgroundScheduler(timezone=settings.TZ)
                 self._scheduler.start()
             self._scheduler.add_job(func=self.__do_tasks, trigger='date', run_date=run_date, name="PT_Task_Retry")
-            logger.info(f"ÒÑ°²ÅÅÖØÊÔÈÎÎñ£¬{interval} Ğ¡Ê±ºóÖ´ĞĞ")
+            logger.info(f"å·²å®‰æ’é‡è¯•ä»»åŠ¡ï¼Œ{interval} å°æ—¶åæ‰§è¡Œ")
         except Exception as e:
-            logger.error(f"°²ÅÅÖØÊÔÈÎÎñÊ§°Ü: {e}")
+            logger.error(f"å®‰æ’é‡è¯•ä»»åŠ¡å¤±è´¥: {e}")
 
     def __do_tasks(self):
         """
-        Õ¾µãÖÜÆÚÈÎÎñÖ´ĞĞ£¨°´ run ±£´æÀúÊ·²¢ºÏ²¢Í¨Öª£©
-        ÓÅ»¯£º³éÈ¡×´Ì¬ÅĞ¶ÏÓëµ¥¸öÈÎÎñÖ´ĞĞÂß¼­£¬¼õÉÙÖØ¸´´úÂë¡£
+        ç«™ç‚¹å‘¨æœŸä»»åŠ¡æ‰§è¡Œï¼ˆæŒ‰ run ä¿å­˜å†å²å¹¶åˆå¹¶é€šçŸ¥ï¼‰
+        ä¼˜åŒ–ï¼šæŠ½å–çŠ¶æ€åˆ¤æ–­ä¸å•ä¸ªä»»åŠ¡æ‰§è¡Œé€»è¾‘ï¼Œå‡å°‘é‡å¤ä»£ç ã€‚
         """
         if hasattr(self, '_auto_task_in') and self._auto_task_in:
-            logger.info("ÒÑÓĞÖÜÆÚÈÎÎñÔÚÖ´ĞĞ£¬Ìø¹ıµ±Ç°ÈÎÎñ")
+            logger.info("å·²æœ‰å‘¨æœŸä»»åŠ¡åœ¨æ‰§è¡Œï¼Œè·³è¿‡å½“å‰ä»»åŠ¡")
             return
 
         self._auto_task_in = True
         try:
             filter_sites = self.get_filter_sites() or []
             any_failure = False
-            run_records = []  # ±¾´ÎÔËĞĞµÄËùÓĞÈÎÎñ¼ÇÂ¼£¨list£©
-            _site_notify_map: Dict[str, List[str]] = {}  # °´Õ¾µã·Ö×éµÄÍ¨ÖªĞĞ
-            _site_order: List[str] = []  # ±£³ÖÕ¾µãË³Ğò
+            run_records = []  # æœ¬æ¬¡è¿è¡Œçš„æ‰€æœ‰ä»»åŠ¡è®°å½•ï¼ˆlistï¼‰
+            _site_notify_map: Dict[str, List[str]] = {}  # æŒ‰ç«™ç‚¹åˆ†ç»„çš„é€šçŸ¥è¡Œ
+            _site_order: List[str] = []  # ä¿æŒç«™ç‚¹é¡ºåº
 
             def is_fail(status: Optional[str]) -> bool:
                 if not status:
                     return False
                 st = status.lower()
-                return ("Ê§°Ü" in status) or ("Òì³£" in status) or ("error" in st)
+                return ("å¤±è´¥" in status) or ("å¼‚å¸¸" in status) or ("error" in st)
 
             def convert_result_to_status(result) -> str:
                 if isinstance(result, str):
                     return result
                 if isinstance(result, dict):
-                    return result.get("status") or result.get("message") or "Ö´ĞĞÍê³É"
+                    return result.get("status") or result.get("message") or "æ‰§è¡Œå®Œæˆ"
                 if result is None:
-                    return "Ö´ĞĞÍê³É"
+                    return "æ‰§è¡Œå®Œæˆ"
                 return repr(result)
 
             def _run_single_task(support_site: dict, task: dict):
                 """
-                Ö´ĞĞµ¥¸öÈÎÎñ²¢·µ»Ø (record, notify_line, failed_bool)
-                ÈôÈÎÎñ±»Ìø¹ı·µ»Ø (None, None, None)
+                æ‰§è¡Œå•ä¸ªä»»åŠ¡å¹¶è¿”å› (record, notify_line, failed_bool)
+                è‹¥ä»»åŠ¡è¢«è·³è¿‡è¿”å› (None, None, None)
                 """
-                site_name = support_site.get("name") or support_site.get("domain") or "Î´ÖªÕ¾µã"
+                site_name = support_site.get("name") or support_site.get("domain") or "æœªçŸ¥ç«™ç‚¹"
                 domain = support_site.get("domain") or ""
                 cookie = support_site.get("cookie")
                 task_id = task.get("id")
                 if not task_id:
-                    logger.debug(f"ÈÎÎñÎŞ id£¬Ìø¹ı: {task}")
+                    logger.debug(f"ä»»åŠ¡æ—  idï¼Œè·³è¿‡: {task}")
                     return None, None, None
 
                 enabled = getattr(self, task_id, False)
                 if not enabled:
-                    logger.debug(f"ÈÎÎñ {task_id} ±»ÅäÖÃÎª½ûÓÃ£¬Ìø¹ı")
+                    logger.debug(f"ä»»åŠ¡ {task_id} è¢«é…ç½®ä¸ºç¦ç”¨ï¼Œè·³è¿‡")
                     return None, None, None
 
                 func_obj = task.get("func")
                 if not func_obj:
-                    logger.warning(f"ÈÎÎñ {task_id} Î´°üº¬¿ÉÖ´ĞĞº¯Êı£¬Ìø¹ı")
+                    logger.warning(f"ä»»åŠ¡ {task_id} æœªåŒ…å«å¯æ‰§è¡Œå‡½æ•°ï¼Œè·³è¿‡")
                     return None, None, None
 
-                # »ñÈ¡·½·¨ÃûÓëËùÊôÀà£¨ÈôÎª°ó¶¨·½·¨£©
+                # è·å–æ–¹æ³•åä¸æ‰€å±ç±»ï¼ˆè‹¥ä¸ºç»‘å®šæ–¹æ³•ï¼‰
                 try:
                     method_name = getattr(getattr(func_obj, "__func__", func_obj), "__name__", None)
                 except Exception:
@@ -483,16 +483,16 @@ class PTAutoTaskdiy(_PluginBase):
                     tasks_cls = None
 
                 if not method_name:
-                    logger.warning(f"ÎŞ·¨È·¶¨ {task_id} µÄ·½·¨Ãû£¬Ìø¹ı")
+                    logger.warning(f"æ— æ³•ç¡®å®š {task_id} çš„æ–¹æ³•åï¼Œè·³è¿‡")
                     return None, None, None
 
                 now_str = datetime.now(tz=pytz.timezone(settings.TZ)).strftime('%Y-%m-%d %H:%M:%S')
 
                 try:
-                    # Ö´ĞĞÈÎÎñ
+                    # æ‰§è¡Œä»»åŠ¡
                     result = None
                     if tasks_cls:
-                        # ³¢ÊÔÓÃ cookie ¹¹ÔìĞÂÊµÀı
+                        # å°è¯•ç”¨ cookie æ„é€ æ–°å®ä¾‹
                         try:
                             new_instance = tasks_cls(cookie=cookie)
                         except TypeError:
@@ -501,11 +501,11 @@ class PTAutoTaskdiy(_PluginBase):
                                 setattr(new_instance, "cookie", cookie)
                         method = getattr(new_instance, method_name, None)
                         if not method:
-                            raise RuntimeError(f"ÔÚĞÂÊµÀıÖĞÎ´ÕÒµ½·½·¨ {method_name}")
-                        logger.info(f"¿ªÊ¼Ö´ĞĞÈÎÎñ {task_id}£¨Õ¾µã: {site_name}£©")
+                            raise RuntimeError(f"åœ¨æ–°å®ä¾‹ä¸­æœªæ‰¾åˆ°æ–¹æ³• {method_name}")
+                        logger.info(f"å¼€å§‹æ‰§è¡Œä»»åŠ¡ {task_id}ï¼ˆç«™ç‚¹: {site_name}ï¼‰")
                         result = method()
                     else:
-                        logger.info(f"Ê¹ÓÃÔ­°ó¶¨·½·¨Ö´ĞĞÈÎÎñ {task_id}£¨Õ¾µã: {site_name}£¬¿ÉÄÜÎŞ cookie£©")
+                        logger.info(f"ä½¿ç”¨åŸç»‘å®šæ–¹æ³•æ‰§è¡Œä»»åŠ¡ {task_id}ï¼ˆç«™ç‚¹: {site_name}ï¼Œå¯èƒ½æ—  cookieï¼‰")
                         result = func_obj()
 
                     status_text = convert_result_to_status(result)
@@ -524,16 +524,16 @@ class PTAutoTaskdiy(_PluginBase):
                     line = f"{emoji} {task.get('label') or task_id}: {status_text}"
 
                     if failed:
-                        logger.warning(f"{site_name} - {task_id} ·µ»ØÊ§°Ü: {status_text}")
+                        logger.warning(f"{site_name} - {task_id} è¿”å›å¤±è´¥: {status_text}")
                     else:
-                        logger.info(f"{site_name} - {task_id} Ö´ĞĞ³É¹¦: {status_text}")
+                        logger.info(f"{site_name} - {task_id} æ‰§è¡ŒæˆåŠŸ: {status_text}")
 
                     return record, line, failed
 
                 except Exception as e:
-                    # ²¶»ñÖ´ĞĞÆÚÒì³££¬¹¹ÔìÊ§°Ü¼ÇÂ¼
-                    logger.error(f"{site_name} - {task.get('id')} Òì³£: {e}", exc_info=True)
-                    err_status = f"Ö´ĞĞÊ§°Ü: {str(e)}"
+                    # æ•è·æ‰§è¡ŒæœŸå¼‚å¸¸ï¼Œæ„é€ å¤±è´¥è®°å½•
+                    logger.error(f"{site_name} - {task.get('id')} å¼‚å¸¸: {e}", exc_info=True)
+                    err_status = f"æ‰§è¡Œå¤±è´¥: {str(e)}"
                     record = {
                         "date": now_str,
                         "site": site_name,
@@ -545,25 +545,25 @@ class PTAutoTaskdiy(_PluginBase):
                     line = f"? {task.get('label') or task.get('id')}: {err_status}"
                     return record, line, True
 
-            # Ö÷Ñ­»·£º¶ÔÃ¿¸öÕ¾µãÓëÈÎÎñµ÷ÓÃ _run_single_task£¬Í³Ò»´¦Àí·µ»Ø
+            # ä¸»å¾ªç¯ï¼šå¯¹æ¯ä¸ªç«™ç‚¹ä¸ä»»åŠ¡è°ƒç”¨ _run_single_taskï¼Œç»Ÿä¸€å¤„ç†è¿”å›
             for support_site in filter_sites:
                 for task in support_site.get("tasks") or []:
                     rec, line, failed = _run_single_task(support_site, task)
                     if rec is None:
                         continue
                     run_records.append(rec)
-                    site_name = rec.get("site") or rec.get("domain") or "Î´ÖªÕ¾µã"
+                    site_name = rec.get("site") or rec.get("domain") or "æœªçŸ¥ç«™ç‚¹"
                     if site_name not in _site_order:
                         _site_order.append(site_name)
                     _site_notify_map.setdefault(site_name, []).append(line)
                     if failed:
                         any_failure = True
 
-            # ¸ù¾İÊ§°ÜÓëÅäÖÃÅĞ¶ÏÊÇ·ñ°²ÅÅÖØÊÔ£¬²¢ÔÚĞèÒªÊ±¸üĞÂÊ§°Ü¼ÇÂ¼µÄ retry ĞÅÏ¢
+            # æ ¹æ®å¤±è´¥ä¸é…ç½®åˆ¤æ–­æ˜¯å¦å®‰æ’é‡è¯•ï¼Œå¹¶åœ¨éœ€è¦æ—¶æ›´æ–°å¤±è´¥è®°å½•çš„ retry ä¿¡æ¯
             if any_failure and self._retry_count and self._retry_count > 0:
                 self._current_retry = min(self._current_retry + 1, self._retry_count)
                 if self._current_retry <= self._retry_count:
-                    logger.info(f"¼ì²âµ½Ö´ĞĞÊ§°Ü£¬°²ÅÅµÚ {self._current_retry} ´ÎÖØÊÔ")
+                    logger.info(f"æ£€æµ‹åˆ°æ‰§è¡Œå¤±è´¥ï¼Œå®‰æ’ç¬¬ {self._current_retry} æ¬¡é‡è¯•")
                     for rec in run_records:
                         st = rec.get("status", "")
                         if is_fail(st):
@@ -575,20 +575,20 @@ class PTAutoTaskdiy(_PluginBase):
                             }
                     self._schedule_retry()
                 else:
-                    logger.info("ÒÑ´ïµ½×î´óÖØÊÔ´ÎÊı£¬²»ÔÙ°²ÅÅÖØÊÔ")
+                    logger.info("å·²è¾¾åˆ°æœ€å¤§é‡è¯•æ¬¡æ•°ï¼Œä¸å†å®‰æ’é‡è¯•")
             else:
                 self._current_retry = 0
 
-            # ±£´æ±¾´ÎÔËĞĞÎªÒ»¸ö list£¨each run is a list of records£©
+            # ä¿å­˜æœ¬æ¬¡è¿è¡Œä¸ºä¸€ä¸ª listï¼ˆeach run is a list of recordsï¼‰
             try:
                 self._save_history_run(run_records)
             except Exception as e:
-                logger.error(f"±£´æ±¾´ÎÔËĞĞÀúÊ·Ê§°Ü: {e}")
+                logger.error(f"ä¿å­˜æœ¬æ¬¡è¿è¡Œå†å²å¤±è´¥: {e}")
 
-            # ºÏ²¢²¢·¢ËÍÒ»´ÎÍ¨Öª£¨ÈôÆôÓÃ£©
+            # åˆå¹¶å¹¶å‘é€ä¸€æ¬¡é€šçŸ¥ï¼ˆè‹¥å¯ç”¨ï¼‰
             if self._notify and _site_notify_map:
-                logger.info("ÍÆËÍÆôÓÃ£¬¿ªÊ¼ºÏ²¢ÕûÀíÈÎÎñÍ¨Öª")
-                title = "PT×Ô¶¯ÈÎÎñÖ´ĞĞ»ã×Ü"
+                logger.info("æ¨é€å¯ç”¨ï¼Œå¼€å§‹åˆå¹¶æ•´ç†ä»»åŠ¡é€šçŸ¥")
+                title = "PTè‡ªåŠ¨ä»»åŠ¡æ‰§è¡Œæ±‡æ€»"
                 parts: List[str] = []
                 for site in _site_order:
                     lines = _site_notify_map.get(site, [])
@@ -596,23 +596,23 @@ class PTAutoTaskdiy(_PluginBase):
                         continue
                     parts.append(f"?? {site}")
                     parts.extend(lines)
-                    parts.append("©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤")  # Õ¾µã¼ä·Ö¸ô·û
-                if parts and parts[-1].startswith("©¤"):
+                    parts.append("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€")  # ç«™ç‚¹é—´åˆ†éš”ç¬¦
+                if parts and parts[-1].startswith("â”€"):
                     parts = parts[:-1]
                 body = "\n".join(parts)
                 try:
                     self._send_notification(title, body)
-                    logger.info(f"ÒÑ·¢ËÍºÏ²¢Í¨Öª")
+                    logger.info(f"å·²å‘é€åˆå¹¶é€šçŸ¥")
                 except Exception as e:
-                    logger.error(f"·¢ËÍºÏ²¢Í¨ÖªÊ§°Ü: {e}")
+                    logger.error(f"å‘é€åˆå¹¶é€šçŸ¥å¤±è´¥: {e}")
 
         finally:
             self._auto_task_in = False
 
     def _save_history_run(self, run_records: list):
         """
-        ½«Ò»´ÎÔËĞĞ£¨run_records: list£©×·¼Óµ½ history ÖĞ¡£
-        history µÄ½á¹¹Îª list£¬Ã¿ÏîÎª {'date': '...', 'records': [...]}
+        å°†ä¸€æ¬¡è¿è¡Œï¼ˆrun_records: listï¼‰è¿½åŠ åˆ° history ä¸­ã€‚
+        history çš„ç»“æ„ä¸º listï¼Œæ¯é¡¹ä¸º {'date': '...', 'records': [...]}
         """
         history = self.get_data('history') or []
         now_str = datetime.now(tz=pytz.timezone(settings.TZ)).strftime('%Y-%m-%d %H:%M:%S')
@@ -623,14 +623,14 @@ class PTAutoTaskdiy(_PluginBase):
 
         history.append(run_entry)
 
-        # ±£ÁôÖ¸¶¨ÌìÊıµÄ¼ÇÂ¼£¨°´ run µÄÈÕÆÚÅĞ¶Ï£©
+        # ä¿ç•™æŒ‡å®šå¤©æ•°çš„è®°å½•ï¼ˆæŒ‰ run çš„æ—¥æœŸåˆ¤æ–­ï¼‰
         if self._history_days:
             try:
                 cutoff = time.time() - int(self._history_days) * 24 * 60 * 60
                 history = [h for h in history if
                            datetime.strptime(h["date"], '%Y-%m-%d %H:%M:%S').timestamp() >= cutoff]
             except Exception as e:
-                logger.error(f"ÇåÀíÀúÊ·¼ÇÂ¼Òì³£: {e}")
+                logger.error(f"æ¸…ç†å†å²è®°å½•å¼‚å¸¸: {e}")
 
         self.save_data(key="history", value=history)
 
@@ -647,13 +647,13 @@ class PTAutoTaskdiy(_PluginBase):
 
     def get_service(self) -> List[Dict[str, Any]]:
         """
-        ×¢²á²å¼ş¹«¹²·şÎñ
+        æ³¨å†Œæ’ä»¶å…¬å…±æœåŠ¡
         [{
-            "id": "·şÎñID",
-            "name": "·şÎñÃû³Æ",
-            "trigger": "´¥·¢Æ÷£ºcron/interval/date/CronTrigger.from_crontab()",
+            "id": "æœåŠ¡ID",
+            "name": "æœåŠ¡åç§°",
+            "trigger": "è§¦å‘å™¨ï¼šcron/interval/date/CronTrigger.from_crontab()",
             "func": self.xxx,
-            "kwargs": {} # ¶¨Ê±Æ÷²ÎÊı
+            "kwargs": {} # å®šæ—¶å™¨å‚æ•°
         }]
         """
         services = []
@@ -661,7 +661,7 @@ class PTAutoTaskdiy(_PluginBase):
         if self._enabled and self._cron:
             services.append({
                 "id": "PT_Auto_Task",
-                "name": "Õ¾µãÖÜÆÚÈÎÎñ·şÎñ",
+                "name": "ç«™ç‚¹å‘¨æœŸä»»åŠ¡æœåŠ¡",
                 "trigger": CronTrigger.from_crontab(self._cron),
                 "func": self.__do_tasks,
                 "kwargs": {}
@@ -671,7 +671,7 @@ class PTAutoTaskdiy(_PluginBase):
 
     def get_form(self) -> Tuple[List[dict], Dict[str, Any]]:
         """
-        Æ´×°²å¼şÅäÖÃÒ³Ãæ£¬ĞèÒª·µ»ØÁ½¿éÊı¾İ£º1¡¢Ò³ÃæÅäÖÃ£»2¡¢Êı¾İ½á¹¹
+        æ‹¼è£…æ’ä»¶é…ç½®é¡µé¢ï¼Œéœ€è¦è¿”å›ä¸¤å—æ•°æ®ï¼š1ã€é¡µé¢é…ç½®ï¼›2ã€æ•°æ®ç»“æ„
         """
         return [
             {
@@ -700,7 +700,7 @@ class PTAutoTaskdiy(_PluginBase):
                                     },
                                     {
                                         'component': 'span',
-                                        'text': 'È«¾ÖÉèÖÃ'
+                                        'text': 'å…¨å±€è®¾ç½®'
                                     }
                                 ]
                             },
@@ -710,7 +710,7 @@ class PTAutoTaskdiy(_PluginBase):
                             {
                                 'component': 'VCardText',
                                 'content': [
-                                    # »ù±¾¿ª¹ØÉèÖÃ
+                                    # åŸºæœ¬å¼€å…³è®¾ç½®
                                     {
                                         'component': 'VRow',
                                         'content': [
@@ -725,7 +725,7 @@ class PTAutoTaskdiy(_PluginBase):
                                                         'component': 'VSwitch',
                                                         'props': {
                                                             'model': 'enabled',
-                                                            'label': 'ÆôÓÃ²å¼ş',
+                                                            'label': 'å¯ç”¨æ’ä»¶',
                                                         }
                                                     }
                                                 ]
@@ -741,7 +741,7 @@ class PTAutoTaskdiy(_PluginBase):
                                                         'component': 'VSwitch',
                                                         'props': {
                                                             'model': 'notify',
-                                                            'label': '¿ªÆôÍ¨Öª',
+                                                            'label': 'å¼€å¯é€šçŸ¥',
                                                         }
                                                     }
                                                 ]
@@ -757,14 +757,14 @@ class PTAutoTaskdiy(_PluginBase):
                                                         'component': 'VSwitch',
                                                         'props': {
                                                             'model': 'onlyonce',
-                                                            'label': 'Á¢¼´ÔËĞĞÒ»´Î',
+                                                            'label': 'ç«‹å³è¿è¡Œä¸€æ¬¡',
                                                         }
                                                     }
                                                 ]
                                             }
                                         ]
                                     },
-                                    # CronÓëÈÕÖ¾±£ÁôÌìÊı
+                                    # Cronä¸æ—¥å¿—ä¿ç•™å¤©æ•°
                                     {
                                         'component': 'VRow',
                                         'content': [
@@ -779,9 +779,9 @@ class PTAutoTaskdiy(_PluginBase):
                                                         'component': 'VCronField',
                                                         'props': {
                                                             'model': 'cron',
-                                                            'label': 'Ö´ĞĞÖÜÆÚ',
+                                                            'label': 'æ‰§è¡Œå‘¨æœŸ',
                                                             'placeholder': '30 9,21 * * *',
-                                                            'hint': 'ÎåÎ»cron±í´ïÊ½£¬Ã¿Ìì9:30Óë21:30Ö´ĞĞ'
+                                                            'hint': 'äº”ä½cronè¡¨è¾¾å¼ï¼Œæ¯å¤©9:30ä¸21:30æ‰§è¡Œ'
                                                         }
                                                     }
                                                 ]
@@ -797,9 +797,9 @@ class PTAutoTaskdiy(_PluginBase):
                                                         'component': 'VTextField',
                                                         'props': {
                                                             'model': 'history_days',
-                                                            'label': 'ÀúÊ·±£ÁôÌìÊı',
+                                                            'label': 'å†å²ä¿ç•™å¤©æ•°',
                                                             'placeholder': '30',
-                                                            'hint': 'ÀúÊ·¼ÇÂ¼±£ÁôÌìÊı'
+                                                            'hint': 'å†å²è®°å½•ä¿ç•™å¤©æ•°'
                                                         }
                                                     }
                                                 ]
@@ -834,14 +834,14 @@ class PTAutoTaskdiy(_PluginBase):
                         #             },
                         #             {
                         #                 'component': 'span',
-                        #                 'text': 'Õ¾µã¸öĞÔ»¯ÉèÖÃ'
+                        #                 'text': 'ç«™ç‚¹ä¸ªæ€§åŒ–è®¾ç½®'
                         #             }
                         #         ]
                         #     },
                         #     {
                         #         'component': 'VDivider'
                         #     },
-                        #     # Õ¾µã-Car ±êÌâ
+                        #     # ç«™ç‚¹-Car æ ‡é¢˜
                         #     {
                         #         'component': 'VRow',
                         #         'content': [
@@ -868,7 +868,7 @@ class PTAutoTaskdiy(_PluginBase):
                         #                                 'props': {
                         #                                     'style': 'font-size: 1.1rem; font-weight: 500;'
                         #                                 },
-                        #                                 'text': 'Car Õ¾µãÉèÖÃ'
+                        #                                 'text': 'Car ç«™ç‚¹è®¾ç½®'
                         #                             }
                         #                         ]
                         #                     }
@@ -876,7 +876,7 @@ class PTAutoTaskdiy(_PluginBase):
                         #             }
                         #         ]
                         #     },
-                        #     # Õ¾µã-Car Êı¾İÉèÖÃ
+                        #     # ç«™ç‚¹-Car æ•°æ®è®¾ç½®
                         #     {
                         #         'component': 'VRow',
                         #         'content': [
@@ -888,8 +888,8 @@ class PTAutoTaskdiy(_PluginBase):
                         #                         'component': 'VSwitch',
                         #                         'props': {
                         #                             'model': 'car_claim',
-                        #                             'label': 'ÁìÈ¡ÈÎÎñ',
-                        #                             'hint': 'ÁìÈ¡CarµÄÌìÌì¿ìÀÖÈÎÎñ'
+                        #                             'label': 'é¢†å–ä»»åŠ¡',
+                        #                             'hint': 'é¢†å–Carçš„å¤©å¤©å¿«ä¹ä»»åŠ¡'
                         #                         }
                         #                     }
                         #                 ]
@@ -913,7 +913,7 @@ class PTAutoTaskdiy(_PluginBase):
                         #             }
                         #         ]
                         #     },
-                        #     # Õ¾µã-QingWa ±êÌâ
+                        #     # ç«™ç‚¹-QingWa æ ‡é¢˜
                         #     {
                         #         'component': 'VRow',
                         #         'content': [
@@ -940,7 +940,7 @@ class PTAutoTaskdiy(_PluginBase):
                         #                                 'props': {
                         #                                     'style': 'font-size: 1.1rem; font-weight: 500;'
                         #                                 },
-                        #                                 'text': '??ÇàÍÜ Õ¾µãÉèÖÃ'
+                        #                                 'text': '??é’è›™ ç«™ç‚¹è®¾ç½®'
                         #                             }
                         #                         ]
                         #                     }
@@ -948,7 +948,7 @@ class PTAutoTaskdiy(_PluginBase):
                         #             }
                         #         ]
                         #     },
-                        #     # Õ¾µã-QingWa Êı¾İÉèÖÃ
+                        #     # ç«™ç‚¹-QingWa æ•°æ®è®¾ç½®
                         #     {
                         #         'component': 'VRow',
                         #         'content': [
@@ -960,8 +960,8 @@ class PTAutoTaskdiy(_PluginBase):
                         #                         'component': 'VSwitch',
                         #                         'props': {
                         #                             'model': 'qingwa_shotbox',
-                        #                             'label': 'º°»°',
-                        #                             'hint': 'Ö´ĞĞÕ¾µã-ÇàÍÜµÄº°»°ÈÎÎñ'
+                        #                             'label': 'å–Šè¯',
+                        #                             'hint': 'æ‰§è¡Œç«™ç‚¹-é’è›™çš„å–Šè¯ä»»åŠ¡'
                         #                         }
                         #                     }
                         #                 ]
@@ -974,8 +974,8 @@ class PTAutoTaskdiy(_PluginBase):
                         #                         'component': 'VSwitch',
                         #                         'props': {
                         #                             'model': 'qingwa_buy_bonus',
-                        #                             'label': 'ÁìÈ¡òòò½',
-                        #                             'hint': 'ÁìÈ¡Õ¾µã-ÇàÍÜµÄÃ¿ÈÕ¸£Àû'
+                        #                             'label': 'é¢†å–èŒèšª',
+                        #                             'hint': 'é¢†å–ç«™ç‚¹-é’è›™çš„æ¯æ—¥ç¦åˆ©'
                         #                         }
                         #                     }
                         #                 ]
@@ -993,9 +993,9 @@ class PTAutoTaskdiy(_PluginBase):
             "cron": "30 9,21 * * *",
             "onlyonce": False,
             "history_days": 30,
-            # # Õ¾µã-Car
+            # # ç«™ç‚¹-Car
             # "car_claim": True,
-            # # Õ¾µã-QingWa
+            # # ç«™ç‚¹-QingWa
             # "qingwa_shotbox": True,
             # "qingwa_buy_bonus": True,
             **{k: True for k in self.get_config_list()}
@@ -1004,13 +1004,13 @@ class PTAutoTaskdiy(_PluginBase):
     # python
     def get_page(self) -> List[dict]:
         """
-        ¹¹½¨²å¼şÏêÇéÒ³Ãæ£¬¶¥²¿Õ¹Ê¾Í³¼ÆĞÅÏ¢£¬ÏÂÃæÕ¹Ê¾°´ÔËĞĞ£¨run£©·Ö×éµÄÀúÊ·£¬Ã¿ÌõÔËĞĞ¿ÉÕ¹¿ª°´Õ¾µã²é¿´ÏêÇé¡£
+        æ„å»ºæ’ä»¶è¯¦æƒ…é¡µé¢ï¼Œé¡¶éƒ¨å±•ç¤ºç»Ÿè®¡ä¿¡æ¯ï¼Œä¸‹é¢å±•ç¤ºæŒ‰è¿è¡Œï¼ˆrunï¼‰åˆ†ç»„çš„å†å²ï¼Œæ¯æ¡è¿è¡Œå¯å±•å¼€æŒ‰ç«™ç‚¹æŸ¥çœ‹è¯¦æƒ…ã€‚
         """
-        # »ù±¾Êı¾İ
+        # åŸºæœ¬æ•°æ®
         filter_sites = self.get_filter_sites() or []
         supported_sites = len(filter_sites)
         supported_tasks = sum(len(s.get("tasks", [])) for s in filter_sites)
-        # ÒÑÆôÓÃÈÎÎñÊı£º¸ù¾İµ±Ç°ÅäÖÃÊôĞÔÅĞ¶Ï
+        # å·²å¯ç”¨ä»»åŠ¡æ•°ï¼šæ ¹æ®å½“å‰é…ç½®å±æ€§åˆ¤æ–­
         enabled_tasks = 0
         for s in filter_sites:
             for t in s.get("tasks", []):
@@ -1018,15 +1018,15 @@ class PTAutoTaskdiy(_PluginBase):
                     enabled_tasks += 1
 
         history = self.get_data('history') or []
-        # °´Ê±¼äµ¹Ğò
+        # æŒ‰æ—¶é—´å€’åº
         history = sorted(history, key=lambda x: x.get("date", ""), reverse=True)
 
-        # Í³¼Æ×î½üÒ»´ÎÖ´ĞĞÓëÀÛ¼Æ³É¹¦/Ê§°Ü
+        # ç»Ÿè®¡æœ€è¿‘ä¸€æ¬¡æ‰§è¡Œä¸ç´¯è®¡æˆåŠŸ/å¤±è´¥
         def is_fail(status: str) -> bool:
             if not status:
                 return False
             st = status.lower()
-            return ("Ê§°Ü" in status) or ("Òì³£" in status) or ("error" in st)
+            return ("å¤±è´¥" in status) or ("å¼‚å¸¸" in status) or ("error" in st)
 
         total_success = 0
         total_fail = 0
@@ -1047,7 +1047,7 @@ class PTAutoTaskdiy(_PluginBase):
                 else:
                     last_run_success += 1
 
-        # ¶¥²¿Í³¼Æ¿¨Æ¬
+        # é¡¶éƒ¨ç»Ÿè®¡å¡ç‰‡
         header_card = {
             'component': 'VCard',
             'props': {'variant': 'outlined', 'class': 'mb-4'},
@@ -1057,22 +1057,22 @@ class PTAutoTaskdiy(_PluginBase):
                     'props': {'class': 'd-flex align-center'},
                     'content': [
                         {'component': 'VIcon', 'props': {'class': 'mr-2'}, 'text': 'mdi-chart-box'},
-                        {'component': 'span', 'text': 'ÔËĞĞÍ³¼Æ¸ÅÀÀ'},
+                        {'component': 'span', 'text': 'è¿è¡Œç»Ÿè®¡æ¦‚è§ˆ'},
                         {'component': 'VSpacer'},
                         {
                             'component': 'VChip',
                             'props': {'size': 'small', 'variant': 'elevated', 'class': 'ma-1'},
-                            'text': f'Õ¾µã: {supported_sites}'
+                            'text': f'ç«™ç‚¹: {supported_sites}'
                         },
                         {
                             'component': 'VChip',
                             'props': {'size': 'small', 'variant': 'elevated', 'class': 'ma-1'},
-                            'text': f'ÈÎÎñ: {supported_tasks}'
+                            'text': f'ä»»åŠ¡: {supported_tasks}'
                         },
                         {
                             'component': 'VChip',
                             'props': {'size': 'small', 'variant': 'elevated', 'color': 'primary', 'class': 'ma-1'},
-                            'text': f'ÆôÓÃ: {enabled_tasks}'
+                            'text': f'å¯ç”¨: {enabled_tasks}'
                         }
                     ]
                 },
@@ -1090,7 +1090,7 @@ class PTAutoTaskdiy(_PluginBase):
                                         {
                                             'component': 'div',
                                             'props': {'class': 'text-subtitle-1'},
-                                            'text': f'×î½üÒ»´Î£¨{history[0]["date"] if history else "ÎŞ¼ÇÂ¼"}£©: ³É¹¦ {last_run_success} / Ê§°Ü {last_run_fail}'
+                                            'text': f'æœ€è¿‘ä¸€æ¬¡ï¼ˆ{history[0]["date"] if history else "æ— è®°å½•"}ï¼‰: æˆåŠŸ {last_run_success} / å¤±è´¥ {last_run_fail}'
                                         }
                                     ]
                                 },
@@ -1101,7 +1101,7 @@ class PTAutoTaskdiy(_PluginBase):
                                         {
                                             'component': 'div',
                                             'props': {'class': 'text-subtitle-1'},
-                                            'text': f'ÀúÊ·×Ü¼Æ: ³É¹¦ {total_success} / Ê§°Ü {total_fail}'
+                                            'text': f'å†å²æ€»è®¡: æˆåŠŸ {total_success} / å¤±è´¥ {total_fail}'
                                         }
                                     ]
                                 },
@@ -1112,7 +1112,7 @@ class PTAutoTaskdiy(_PluginBase):
                                         {
                                             'component': 'div',
                                             'props': {'class': 'text-subtitle-1'},
-                                            'text': f'ÖØÊÔÅäÖÃ: {self._retry_count or 0} ´Î, ¼ä¸ô {self._retry_interval} Ğ¡Ê±'
+                                            'text': f'é‡è¯•é…ç½®: {self._retry_count or 0} æ¬¡, é—´éš” {self._retry_interval} å°æ—¶'
                                         }
                                     ]
                                 }
@@ -1123,26 +1123,26 @@ class PTAutoTaskdiy(_PluginBase):
             ]
         }
 
-        # ÀúÊ·Ãæ°å£ºÃ¿¸ö run Ò»¸öÕ¹¿ªÏî
+        # å†å²é¢æ¿ï¼šæ¯ä¸ª run ä¸€ä¸ªå±•å¼€é¡¹
         panels = []
         for run in history:
             run_date = run.get("date", "")
             records = run.get("records", []) or []
-            # ¼ÆËã±¾´ÎÔËĞĞµÄÆôÓÃ/³É¹¦/Ê§°Ü£¨ÆôÓÃ°´µ±Ç°ÅäÖÃÅĞ¶¨£©
+            # è®¡ç®—æœ¬æ¬¡è¿è¡Œçš„å¯ç”¨/æˆåŠŸ/å¤±è´¥ï¼ˆå¯ç”¨æŒ‰å½“å‰é…ç½®åˆ¤å®šï¼‰
             run_enabled = sum(1 for r in records if getattr(self, r.get("task_id"), False))
             run_success = sum(1 for r in records if not is_fail(r.get("status", "")))
             run_fail = len(records) - run_success
 
-            # °´Õ¾µã·Ö×é
+            # æŒ‰ç«™ç‚¹åˆ†ç»„
             sites_map: Dict[str, List[dict]] = {}
             site_order: List[str] = []
             for r in records:
-                site = r.get("site") or r.get("domain") or "Î´ÖªÕ¾µã"
+                site = r.get("site") or r.get("domain") or "æœªçŸ¥ç«™ç‚¹"
                 if site not in site_order:
                     site_order.append(site)
                 sites_map.setdefault(site, []).append(r)
 
-            # ¹¹ÔìÃ¿¸öÕ¾µãµÄÏêÇé½Úµã£¨simple list£©
+            # æ„é€ æ¯ä¸ªç«™ç‚¹çš„è¯¦æƒ…èŠ‚ç‚¹ï¼ˆsimple listï¼‰
             site_blocks = []
             for site in site_order:
                 recs = sites_map.get(site, [])
@@ -1161,7 +1161,7 @@ class PTAutoTaskdiy(_PluginBase):
                                 {
                                     'component': 'VChip',
                                     'props': {'size': 'small', 'variant': 'elevated'},
-                                    'text': f'ÈÎÎñÊı: {len(recs)}'
+                                    'text': f'ä»»åŠ¡æ•°: {len(recs)}'
                                 }
                             ]
                         },
@@ -1196,7 +1196,7 @@ class PTAutoTaskdiy(_PluginBase):
                 }
                 site_blocks.append(site_block)
 
-            # Ãæ°å±êÌâ£¨¼ò½à»ã×Ü£©
+            # é¢æ¿æ ‡é¢˜ï¼ˆç®€æ´æ±‡æ€»ï¼‰
             panel_title = {
                 'component': 'div',
                 'props': {'class': 'd-flex align-center'},
@@ -1205,17 +1205,17 @@ class PTAutoTaskdiy(_PluginBase):
                     {
                         'component': 'VChip',
                         'props': {'size': 'small', 'variant': 'elevated', 'class': 'ma-1'},
-                        'text': f'ÆôÓÃ: {run_enabled}'
+                        'text': f'å¯ç”¨: {run_enabled}'
                     },
                     {
                         'component': 'VChip',
                         'props': {'size': 'small', 'variant': 'elevated', 'color': 'success', 'class': 'ma-1'},
-                        'text': f'³É¹¦: {run_success}'
+                        'text': f'æˆåŠŸ: {run_success}'
                     },
                     {
                         'component': 'VChip',
                         'props': {'size': 'small', 'variant': 'elevated', 'color': 'error', 'class': 'ma-1'},
-                        'text': f'Ê§°Ü: {run_fail}'
+                        'text': f'å¤±è´¥: {run_fail}'
                     }
                 ]
             }
@@ -1231,7 +1231,7 @@ class PTAutoTaskdiy(_PluginBase):
                     {
                         'component': 'VExpansionPanelText',
                         'content': site_blocks or [
-                            {'component': 'div', 'text': 'ÎŞÏêÏ¸¼ÇÂ¼'}
+                            {'component': 'div', 'text': 'æ— è¯¦ç»†è®°å½•'}
                         ]
                     }
                 ]
@@ -1246,9 +1246,9 @@ class PTAutoTaskdiy(_PluginBase):
                     'props': {'class': 'd-flex align-center'},
                     'content': [
                         {'component': 'VIcon', 'props': {'class': 'mr-2'}, 'text': 'mdi-history'},
-                        {'component': 'span', 'text': 'Ö´ĞĞÀúÊ·¼ÇÂ¼'},
+                        {'component': 'span', 'text': 'æ‰§è¡Œå†å²è®°å½•'},
                         {'component': 'VSpacer'},
-                        {'component': 'span', 'text': f'¹² {len(history)} ´ÎÔËĞĞ'}
+                        {'component': 'span', 'text': f'å…± {len(history)} æ¬¡è¿è¡Œ'}
                     ]
                 },
                 {'component': 'VDivider'},
@@ -1259,7 +1259,7 @@ class PTAutoTaskdiy(_PluginBase):
                             'component': 'VExpansionPanels',
                             'props': {'accordion': True},
                             'content': panels if panels else [
-                                {'component': 'div', 'text': 'ÔİÎŞÀúÊ·¼ÇÂ¼'}
+                                {'component': 'div', 'text': 'æš‚æ— å†å²è®°å½•'}
                             ]
                         }
                     ]
@@ -1267,16 +1267,16 @@ class PTAutoTaskdiy(_PluginBase):
             ]
         }
 
-        # ½á¹ûÒ³Ãæ×éºÏ
+        # ç»“æœé¡µé¢ç»„åˆ
         components = []
         components.append(header_card)
         components.append(history_section)
 
-        # ÈôÓĞÓÃ»§ĞÅÏ¢»òÆäËû±£³ÖÔ­ÓĞÂß¼­£¨¼ò»¯£º±£ÁôÇ°ÃæÓÃ»§ĞÅÏ¢¿¨Æ¬Âß¼­£©
+        # è‹¥æœ‰ç”¨æˆ·ä¿¡æ¯æˆ–å…¶ä»–ä¿æŒåŸæœ‰é€»è¾‘ï¼ˆç®€åŒ–ï¼šä¿ç•™å‰é¢ç”¨æˆ·ä¿¡æ¯å¡ç‰‡é€»è¾‘ï¼‰
         user_info = self.get_data('user_info')
         if user_info and 'data' in user_info and 'attributes' in user_info['data']:
-            # ¾¡Á¿±£ÁôÖ®Ç°¹¹ÔìµÄ user_info_card Âß¼­£¬ÈôĞèÒª¸ü¸´ÔÓÏÔÊ¾¿É¸´ÓÃÔ­ÊµÏÖ
-            username = user_info['data']['attributes'].get('displayName', 'Î´ÖªÓÃ»§')
+            # å°½é‡ä¿ç•™ä¹‹å‰æ„é€ çš„ user_info_card é€»è¾‘ï¼Œè‹¥éœ€è¦æ›´å¤æ‚æ˜¾ç¤ºå¯å¤ç”¨åŸå®ç°
+            username = user_info['data']['attributes'].get('displayName', 'æœªçŸ¥ç”¨æˆ·')
             avatar_url = user_info['data']['attributes'].get('avatarUrl', '')
             user_card = {
                 'component': 'VCard',
@@ -1284,7 +1284,7 @@ class PTAutoTaskdiy(_PluginBase):
                 'content': [
                     {'component': 'VCardTitle', 'content': [{'component': 'span', 'text': username}]},
                     {'component': 'VDivider'},
-                    {'component': 'VCardText', 'content': [{'component': 'div', 'text': f'Í·Ïñ: {avatar_url}'}]}
+                    {'component': 'VCardText', 'content': [{'component': 'div', 'text': f'å¤´åƒ: {avatar_url}'}]}
                 ]
             }
             components.insert(0, user_card)
@@ -1293,7 +1293,7 @@ class PTAutoTaskdiy(_PluginBase):
 
     def stop_service(self):
         """
-        ÍË³ö²å¼ş
+        é€€å‡ºæ’ä»¶
         """
         try:
             if self._scheduler:
@@ -1302,4 +1302,4 @@ class PTAutoTaskdiy(_PluginBase):
                     self._scheduler.shutdown()
                 self._scheduler = None
         except Exception as e:
-            logger.error("ÍË³ö²å¼şÊ§°Ü£º%s" % str(e))
+            logger.error("é€€å‡ºæ’ä»¶å¤±è´¥ï¼š%s" % str(e))
