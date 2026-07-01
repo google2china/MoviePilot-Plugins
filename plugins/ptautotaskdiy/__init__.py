@@ -21,9 +21,9 @@ import inspect
 from pathlib import Path
 
 
-class PTAutoTask(_PluginBase):
+class PTAutoTaskdiy(_PluginBase):
     # 插件名称
-    plugin_name = "PT自动任务"
+    plugin_name = "PT自动任务(自用版)"
     # 插件描述
     plugin_desc = "用来执行一些站点的定期任务，包括但不限于签到、喊话、领取任务等;本版本在liuyunfz大佬插件基础上增加了若干其他站点周期性任务领取功能"
     # 插件图标
@@ -31,11 +31,11 @@ class PTAutoTask(_PluginBase):
     # 插件版本
     plugin_version = "1.1.8"
     # 插件作者
-    plugin_author = "liuyunfz,bfjy"
+    plugin_author = "liuyunfz,bfjy,tzk"
     # 作者主页
     author_url = "https://bfjy2024.github.io/bfjy"
     # 插件配置项ID前缀
-    plugin_config_prefix = "ptautotask_"
+    plugin_config_prefix = "ptautotaskdiy_"
     # 加载顺序
     plugin_order = 24
     # 可使用的用户级别
