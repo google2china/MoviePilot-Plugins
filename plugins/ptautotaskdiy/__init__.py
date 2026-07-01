@@ -1,4 +1,4 @@
-import json
+﻿import json
 import re
 import time
 from datetime import datetime, timedelta
@@ -25,7 +25,7 @@ class PTAutoTaskdiy(_PluginBase):
     # 插件名称
     plugin_name = "PT自动任务(自用版)"
     # 插件描述
-    plugin_desc = "用来执行一些站点的定期任务，包括但不限于签到、喊话、领取任务等;本版本在liuyunfz大佬插件基础上增加了若干其他站点周期性任务领取功能"
+    plugin_desc = "站点的定期任务，签到、喊话、领取任务等"
     # 插件图标
     plugin_icon = "https://raw.githubusercontent.com/liuyunfz/MoviePilot-Plugins/main/icons/ptautotask.png"
     # 插件版本
