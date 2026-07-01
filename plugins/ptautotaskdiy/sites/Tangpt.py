@@ -40,10 +40,10 @@ class Tasks(BaseTask):
         _, month_last_day = calendar.monthrange(today.year, today.month)
         if today.day == month_last_day:
         	task_id_list = ["3", "4"]
-        	return "\n".join([self.client.claim_task(item) for item in task_id_list])
         else:
-            task_id = "5"
-			return self.client.claim_task(task_id)
+        	task_id_list = ["5"]
+		
+        return "\n".join([self.client.claim_task(item) for item in task_id_list])
         
     def daily_checkin(self):
         return self.client.attendance()
