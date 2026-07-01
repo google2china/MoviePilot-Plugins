@@ -23,7 +23,7 @@ from pathlib import Path
 
 class PTAutoTaskdiy(_PluginBase):
     # 插件名称
-    plugin_name = "PT任务(自用)"
+    plugin_name = "PT自动任务(自用)"
     # 插件描述
     plugin_desc = "站点的定期任务，签到、喊话、领取任务等"
     # 插件图标
