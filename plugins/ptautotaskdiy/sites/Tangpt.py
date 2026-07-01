@@ -33,7 +33,7 @@ class Tasks(BaseTask):
     def __init__(self, cookie: str):
         super().__init__(Tangpt(cookie))
 
-    @task_info(label="躺平任务领取", hint="站点(苍蝇腿/VIP/BUG)任务，平日领(苍蝇腿)任务，月末领VIP/BUG任务。")
+    @task_info(label="躺平任务领取", hint="站点苍蝇腿/VIP/BUG任务，平日领苍蝇腿任务，月末领VIP/BUG任务。")
     def daily_claim_task(self):
         # 获取今天日期，判断是否当月最后一天
         today = datetime.date.today()
