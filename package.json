@@ -1,6 +1,6 @@
 {
   "PTAutoTaskdiy": {
-    "name": "PT自动任务(自用)",
+    "name": "PT任务(自用)",
     "description": "站点的定期任务，签到、喊话、领取任务等",
     "labels": "每日任务,喊话",
     "version": "1.1.8",
