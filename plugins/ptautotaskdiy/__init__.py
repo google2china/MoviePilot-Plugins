@@ -23,7 +23,7 @@ from pathlib import Path
 
 class PTAutoTaskdiy(_PluginBase):
     # 插件名称
-    plugin_name = "PT自动任务_自用"
+    plugin_name = "PT自动任务(自用)"
     # 插件描述
     plugin_desc = "站点的定期任务，签到、喊话、领取任务等"
     # 插件图标
@@ -33,7 +33,7 @@ class PTAutoTaskdiy(_PluginBase):
     # 插件作者
     plugin_author = "liuyunfz,bfjy,tzk"
     # 作者主页
-    author_url = "https://bfjy2024.github.io/bfjy"
+    author_url = "https://github.com/google2china/MoviePilot-Plugins"
     # 插件配置项ID前缀
     plugin_config_prefix = "ptautotaskdiy_"
     # 加载顺序
