@@ -42,7 +42,8 @@ class Tasks(BaseTask):
 			task_id_list = ["3", "4"]
         else:
 			task_id_list = ["5"]
-        return "\n".join([self.client.claim_task(item) for item in task_id_list])		
+        
+		return "\n".join([self.client.claim_task(item) for item in task_id_list])		
 		
     def daily_checkin(self):
         return self.client.attendance()
