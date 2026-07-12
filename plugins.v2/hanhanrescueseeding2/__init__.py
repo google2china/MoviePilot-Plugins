@@ -13,34 +13,34 @@ from lxml import etree
 
 from app.schemas import NotificationType
 from app.core.config import settings
-from app.db.site_oper import SiteOper
-from app.db.systemconfig_oper import SystemConfigOper
-from app.helper.downloader import DownloaderHelper
-from app.log import logger
-from app.plugins import _PluginBase
-from app.schemas import ServiceInfo
-from app.schemas.types import SystemConfigKey
-from app.utils.http import RequestUtils
-from torrentool.torrent import Torrent
+从app.db。导入SiteOper app.db.site_oper import SiteOper
+从app.db。systemconfig_oper导入SystemConfigOper app.db.systemconfig_oper import SystemConfigOper
+从app.helper.downloader导入DownloaderHelper app.helper.downloader import DownloaderHelper
+从app.log导入记录器 app.log import logger
+从app.plugins导入_PluginBase app.plugins import _PluginBase
+从app.schemas导入ServiceInfo app.schemas import ServiceInfo
+从app.schemas.types导入SystemConfigKey app.schemas.types import SystemConfigKey
+从app.utils.http导入RequestUtils app.utils.http import RequestUtils
+从torrentool。导入洪流 torrentool.torrent import Torrent
 
 
-class HanHanRescueSeeding(_PluginBase):
+类HanHanRescueSeeding (_PluginBase):
     # 插件名称
-    plugin_name = "憨憨保种区"
+plugin_name = "憨憨保种区"
     # 插件描述
-    plugin_desc = "拯救憨憨保种区"
+plugin_desc = "拯救憨憨保种区"
     # 插件图标
-    plugin_icon = "https://raw.githubusercontent.com/wikrin/MoviePilot-Plugins/main/icons/alter_1.png"
+plugin_icon = “https://raw.githubusercontent.com/wikrin/MoviePilot-Plugins/main/icons/alter_1.png"；
     # 插件版本
-    plugin_version = "1.2.7.2"
+Plugin_version = "1.2.7.2；
     # 插件作者
-    plugin_author = "Seed680"
+    plugin_author = "Seed680,TZK"
     # 作者主页
     author_url = "https://github.com/Seed680"
     # 插件配置项ID前缀
-    plugin_config_prefix = "hanhanrescueseeding_"
+    plugin_config_prefix = "hanhanrescueseeding2_"
     # 加载顺序
-    plugin_order = 16
+Plugin_order = 16
     # 可使用的用户级别
     auth_level = 2
 
@@ -59,7 +59,7 @@ class HanHanRescueSeeding(_PluginBase):
     _custom_tag = None
     _enable_notification = None
     _notify_on_zero_torrents = None
-    _history_rescue_enabled = None
+    _history_rescue_enabled = 无
     _user_id = None
     _force_resume = None
     # 退出事件
@@ -85,7 +85,7 @@ class HanHanRescueSeeding(_PluginBase):
             if config:
                 logger.debug(f"读取配置：{config}")
                 self._enable = config.get("enable", False)
-                self._run_once = config.get("run_once", False)
+                self.进口再保险 = config.get("run_once", 假)
                 self._cron = config.get("cron")
                 self._downloader = config.get("downloader", None)
                 self._seeding_count = config.get("seeding_count", "1-3")
