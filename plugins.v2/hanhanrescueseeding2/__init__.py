@@ -24,21 +24,21 @@ from app.utils.http import RequestUtils
 from torrentool.torrent import Torrent
 
 
-class HanHanRescueSeeding(_PluginBase):
+class HanHanRescueSeeding2(_PluginBase):
     # 插件名称
-    plugin_name = "憨憨保种区"
+    plugin_name = "憨憨保种区2"
     # 插件描述
-    plugin_desc = "拯救憨憨保种区"
+    plugin_desc = "拯救憨憨保种区2"
     # 插件图标
     plugin_icon = "https://raw.githubusercontent.com/wikrin/MoviePilot-Plugins/main/icons/alter_1.png"
     # 插件版本
     plugin_version = "1.2.7.2"
     # 插件作者
-    plugin_author = "Seed680"
+    plugin_author = "Seed680,TZK"
     # 作者主页
     author_url = "https://github.com/Seed680"
     # 插件配置项ID前缀
-    plugin_config_prefix = "hanhanrescueseeding_"
+    plugin_config_prefix = "hanhanrescueseeding2_"
     # 加载顺序
     plugin_order = 16
     # 可使用的用户级别
