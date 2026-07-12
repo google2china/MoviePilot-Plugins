@@ -1,8 +1,8 @@
 {
-    "HanHanRescueSeeding": {
-        "name": "憨憨保种区",
-        "description": "拯救憨憨保种区",
-        "labels": "保种",
+    "HanHanRescueSeeding2": {
+        "name": "憨憨保种区2",
+        "description": "拯救憨憨保种区2",
+        "labels": "保种2",
 "version": "1.2.7.2",
 "icon": “https://raw.githubusercontent.com/Seed680/MoviePilot-Plugins/main/icons/customplugin.png",
 "author": "Seed680",
