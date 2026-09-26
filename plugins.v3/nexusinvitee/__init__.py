@@ -343,7 +343,7 @@ class Prescription():
                                                                         },
                                                                         {
                                                                             "component": "td",
-                                                                            "text": "测试可邀请" if invite_status.get("can_invite") else "不可邀请"
+                                                                            "text": "测试可邀请" site.get("error") or str(site["can_buy"])
                                                                         }
                                                                     ]
                                                                 } for site in med_data["details"]
