@@ -314,6 +314,10 @@ class Prescription():
                                                                         {
                                                                             "component": "th",
                                                                             "text": "可购买"
+                                                                        },
+                                                                        {
+                                                                            "component": "th",
+                                                                            "text": "发药权"
                                                                         }
                                                                     ]
                                                                 }
@@ -336,6 +340,10 @@ class Prescription():
                                                                         {
                                                                             "component": "td",
                                                                             "text": site.get("error") or str(site["can_buy"])
+                                                                        },
+                                                                        {
+                                                                            "component": "td",
+                                                                            "text": "测试可邀请" if invite_status.get("can_invite") else "不可邀请"
                                                                         }
                                                                     ]
                                                                 } for site in med_data["details"]
